@@ -1,15 +1,19 @@
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class Game extends JFrame {
 
-    public static int WIDTH = 360 , HEIGHT = 350;
-    int[] boundaries = {50, 100, 150, 200, 250, 300, 350};
+    static int WIDTH = 360 , HEIGHT = 350;
+    static ArrayList<Integer>[] circles = new ArrayList[7];
+    int tour = 1;
     public static void main(String[] args) {
         new Game();
     }
 
+    //"gracz" wykonuje ruch, po ruchu jest sprawdzane win condition
+    //"gracz" move -> win condition, static which player (2 players),
     public Game(){
         this.setTitle("Connect 4");
         this.setSize(WIDTH, HEIGHT); //7 on 6
@@ -17,8 +21,19 @@ public class Game extends JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        //creating board of empty circles
+        for(int i = 0; i < 7; i++) {
+            circles[i] = new ArrayList<>();
+            for (int j = 0; j < 6; j++) {
+                circles[i].add(0);
+            }
+        }
+        Player player1 = new Player();
+        Player player2 = new Player();
+
         Draw draw = new Draw();
         this.add(draw);
+
 
         addMouseListener(new MouseListener() {
             @Override
@@ -33,7 +48,16 @@ public class Game extends JFrame {
                         column = j;
                     }
                 }
-                System.out.println(column);
+                if(Player.tour && column != -1){
+                    player1.move(column);
+                    Player.tour = !Player.tour;
+                    repaint();
+                }
+                else if(!Player.tour && column != -1){
+                    player2.move(column);
+                    Player.tour = !Player.tour;
+                    repaint();
+                }
             }
 
             @Override
@@ -52,4 +76,6 @@ public class Game extends JFrame {
 
         this.setVisible(true);
     }
+
+
 }
