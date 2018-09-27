@@ -32,9 +32,18 @@ public class Draw extends JComponent {
         }
 
         if (Player.tour) {
-            g2.drawString("Red turns", 150, 310);
+            g2.setColor(Color.red);
+            g2.drawRect(140, 300, 10, 10);
+            g2.fillRect(140, 300, 10, 10);
+            g2.setColor(Color.black);
+            g2.drawString(" turns", 150, 310);
         }
-        else
-            g2.drawString("Blue turns", 150, 310);
+        else {
+            g2.setColor(Color.blue);
+            g2.drawRect(140, 300, 10, 10);
+            g2.fillRect(140, 300, 10, 10);
+            g2.setColor(Color.black);
+            g2.drawString(" turns", 150, 310);
+        }
     }
 }

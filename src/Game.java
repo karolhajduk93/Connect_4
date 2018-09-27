@@ -50,13 +50,13 @@ public class Game extends JFrame {
                 }
                 if(Player.tour && column != -1){
                     player1.move(column);
-                    Player.tour = !Player.tour;
                     repaint();
+                    Player.winCondition();
                 }
                 else if(!Player.tour && column != -1){
                     player2.move(column);
-                    Player.tour = !Player.tour;
                     repaint();
+                    Player.winCondition();
                 }
             }
 
