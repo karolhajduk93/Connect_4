@@ -1,19 +1,18 @@
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.lang.management.PlatformLoggingMXBean;
 import java.util.ArrayList;
 
 public class Game extends JFrame {
 
     static int WIDTH = 360 , HEIGHT = 350;
     static ArrayList<Integer>[] circles = new ArrayList[7];
-    int tour = 1;
     public static void main(String[] args) {
         new Game();
     }
 
-    //"gracz" wykonuje ruch, po ruchu jest sprawdzane win condition
-    //"gracz" move -> win condition, static which player (2 players),
+
     public Game(){
         this.setTitle("Connect 4");
         this.setSize(WIDTH, HEIGHT); //7 on 6
@@ -52,11 +51,13 @@ public class Game extends JFrame {
                     player1.move(column);
                     repaint();
                     Player.winCondition();
+                    repaint();
                 }
                 else if(!Player.tour && column != -1){
                     player2.move(column);
                     repaint();
                     Player.winCondition();
+                    repaint();
                 }
             }
 
@@ -77,5 +78,15 @@ public class Game extends JFrame {
         this.setVisible(true);
     }
 
-
+    public static void setDefault(){
+        for(int i = 0; i < 7; i++) {
+            for (int j = 0; j < 6; j++) {
+                circles[i].set(j, 0);
+            }
+        }
+        Player.tour = true;
+        Player.moveNumber = 0;
+        Player.counterBlue = 0;
+        Player.counterRed = 0;
+    }
 }

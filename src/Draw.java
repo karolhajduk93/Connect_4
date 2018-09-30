@@ -10,9 +10,6 @@ public class Draw extends JComponent {
 
         Graphics2D g2 = (Graphics2D) g;
 
-
-        /*Game.circles[0].set(0, 1);
-        Game.circles[6].set(0, 1);*/
         for(int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
                 g2.draw( new Ellipse2D.Double(5 + (50*j), 5 + (50*i), 40, 40));
